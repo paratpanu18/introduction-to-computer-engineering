@@ -1,31 +1,19 @@
-const int pingPin = 13;
-int inPin = 12;
+const int ledPin[4] = {8, 9, 10, 11};
 void setup() {
-Serial.begin(9600);
+  for(int i = 0; i < 4; i++) pinMode(ledPin[i], OUTPUT);
+  for(int i = 0; i < 4; i++) {
+    digitalWrite(ledPin[i], LOW);
+  }
 }
 
 void loop() {
-  long duration, cm;
-  pinMode(pingPin, OUTPUT);
-  digitalWrite(pingPin, LOW);
-  delayMicroseconds(2);
-  digitalWrite(pingPin, HIGH);
-  delayMicroseconds(5);
-  digitalWrite(pingPin, LOW);
-  pinMode(inPin, INPUT);
-  duration = pulseIn(inPin, HIGH);
-  Serial.print(duration);
-  Serial.println();
-  //cm = microsecondsToCentimeters(duration);
-  //Serial.print(cm);
-  //Serial.print("cm");
-  //Serial.println();
-  delay(100);
-}
-long microsecondsToCentimeters(long microseconds)
-{
-// The speed of sound is 340 m/s or 29 microseconds per centimeter.
-// The ping travels out and back, so to find the distance of the
-// object we take half of the distance travelled.
-return microseconds / 29 / 2;
+  for(int i = 0; i < 4; i++) {
+    digitalWrite(ledPin[i], HIGH);
+    delay(500);
+  }
+  
+  for(int i = 3; i >= 0; i--) {
+    digitalWrite(ledPin[i],LOW);
+    delay(500);
+  }
 }
